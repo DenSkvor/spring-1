@@ -1,0 +1,15 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /shop
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hibernate_test_db?serverTimezone=Europe/Moscow
+    username: root
+    password: 123
+  jpa:
+    show-sql: true
+    properties:
+      hybernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
