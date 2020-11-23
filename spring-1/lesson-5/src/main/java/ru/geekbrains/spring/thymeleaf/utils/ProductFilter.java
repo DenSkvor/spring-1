@@ -15,9 +15,12 @@ public class ProductFilter {
 
     private String filter;
 
+    private String categoryFilter;
+
     public ProductFilter(Map<String, String> params){
         spec = Specification.where(null);
         StringBuilder tempFilter = new StringBuilder();
+        StringBuilder tempCatFilter = new StringBuilder();
         //по-хорошему вместо проверки !isEmpty нужна проверка !isBlank, но у меня устаовлена 8 версия джавы, поэтому увы.
         if(params.containsKey("minPrice") && !params.get("minPrice").isEmpty()) {
             spec = spec.and(ProductSpecification.findByPriceGTE(Integer.parseInt(params.get("minPrice"))));
@@ -32,6 +35,11 @@ public class ProductFilter {
             spec = spec.and(ProductSpecification.findByTitleLike(params.get("title")));
             tempFilter.append("&title=" + params.get("title"));
         }
+        if(params.containsKey("category") && !params.get("category").isEmpty()) {
+            spec = spec.and(ProductSpecification.findByCategory(Integer.parseInt(params.get("category"))));
+            tempCatFilter.append("&category=" + params.get("category"));
+        }
         filter = tempFilter.toString();
+        categoryFilter = tempCatFilter.toString();
     }
 }

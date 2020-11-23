@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.spring.thymeleaf.Exceptions.ProductNotFoundException;
 import ru.geekbrains.spring.thymeleaf.models.Product;
+import ru.geekbrains.spring.thymeleaf.services.CategoryService;
 import ru.geekbrains.spring.thymeleaf.services.ProductService;
 import ru.geekbrains.spring.thymeleaf.utils.ProductFilter;
 
@@ -19,6 +20,7 @@ import java.util.Map;
 public class ProductController {
 
     private ProductService productService;
+    private CategoryService categoryService;
 
 
     @GetMapping
@@ -32,7 +34,9 @@ public class ProductController {
 
         ProductFilter pf = new ProductFilter(params);
         model.addAttribute("products", productService.getProducts(pf.getSpec(), pageNum - 1, pageSize));
+        model.addAttribute("categories", categoryService.getCategories());
         model.addAttribute("productFilter", pf.getFilter());
+        model.addAttribute("productCategoryFilter", pf.getCategoryFilter());
 
         return "products";
     }

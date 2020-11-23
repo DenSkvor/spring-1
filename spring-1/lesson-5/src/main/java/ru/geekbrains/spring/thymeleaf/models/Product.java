@@ -23,4 +23,8 @@ public class Product {
     @Column(name = "product_price")
     private Integer price;
 
+    @ManyToOne
+    @JoinColumn(name = "product_category")
+    private Category category;
+
 }
