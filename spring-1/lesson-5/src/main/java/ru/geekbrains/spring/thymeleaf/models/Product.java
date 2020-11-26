@@ -1,9 +1,11 @@
 package ru.geekbrains.spring.thymeleaf.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -26,5 +28,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "product_category")
     private Category category;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    List<OrderItem> orderItems;
 
 }

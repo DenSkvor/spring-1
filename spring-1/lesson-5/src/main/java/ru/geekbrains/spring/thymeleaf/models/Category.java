@@ -1,5 +1,6 @@
 package ru.geekbrains.spring.thymeleaf.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class Category {
     @Column(name = "category_title")
     private String title;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     List<Product> products;
 }
